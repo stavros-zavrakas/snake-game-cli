@@ -24,16 +24,23 @@ function frame(RL) {
 }
 
 // reset cursor and draw inside of frame
-function board(RL) {
+function board(RL, snake) {
   muted = false; // stdout enabled
 
-  let x = axis.getX();
-  let y = axis.getY();
+  // let x = axis.getX();
+  // let y = axis.getY();
 
-  Readline.cursorTo(RL, x, y); // go to second line
+  let tail = snake.getTail();
+  let head = snake.getHead();
+  logger.info(tail);
 
-  // RL.write(`║ ${Date.now()}`); // print timestamp
-  RL.write(`#`); // print timestamp
+  // Print the new body of the snake
+  Readline.cursorTo(RL, head.x, head.y);
+  RL.write(`#`);
+
+  // Print the new body of the snake
+  Readline.cursorTo(RL, tail.x, tail.y);
+  RL.write(` `);
 
   Readline.cursorTo(RL, 0, config.HEIGHT); // go to last line
 
@@ -43,8 +50,6 @@ function board(RL) {
 function writeBuffer(chunk, encoding, callback) {
 
   if (!muted) {
-    logger.info(Buffer.byteLength(chunk, 'utf8'));
-
     process.stdout.write(chunk, encoding);
   }
 

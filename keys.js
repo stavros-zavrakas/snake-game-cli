@@ -5,8 +5,11 @@ const keypress = require('keypress');
 const Writable = require('stream').Writable;
 const Readline = require('readline');
 
+const Snake = require('./Snake');
 const axis = require('./axis');
 const draw = require('./draw');
+
+let snake = new Snake();
 
 // custom stdout to suppress output
 const customStdout = new Writable({
@@ -38,11 +41,24 @@ RL.input.on('keypress', (chunk, key) => {
 
   if (availableMoves.indexOf(key.name) > -1) {
     move = key.name;
+
+    // if (move === 'right') {
+    //   axis.moveRight();
+    // } else if (move === 'left') {
+    //   axis.moveLeft();
+    // } else if (move === 'up') {
+    //   axis.moveUp();
+    // } else if (move === 'down') {
+    //   axis.moveDown();
+    // }
+
+    // snake.addToHead(axis.getX(), axis.getY());
+    // draw.board(RL, snake);
+    // snake.removeFromTail();
   }
 });
 
 let interval = setInterval(function () {
-  console.log('calling');
   if (move === 'right') {
     axis.moveRight();
   } else if (move === 'left') {
@@ -53,12 +69,9 @@ let interval = setInterval(function () {
     axis.moveDown();
   }
 
-  draw.board(RL);
+  snake.addToHead(axis.getX(), axis.getY());
+  draw.board(RL, snake);
+  snake.removeFromTail();
 }, 100);
 
 draw.frame(RL);
-
-process.on('SIGINT', () => {
-  clearInterval(interval);
-  console.log('Received SIGINT.  Press Control-D to exit.');
-});
