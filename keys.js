@@ -5,6 +5,7 @@ const keypress = require('keypress');
 const Writable = require('stream').Writable;
 const Readline = require('readline');
 
+const axis = require('./axis');
 const draw = require('./draw');
 
 // custom stdout to suppress output
@@ -32,14 +33,17 @@ RL.input.on('keypress', (chunk, key) => {
 
   RL.clearLine();
 
-  if (
-    key.name === 'right' ||
-    key.name === 'left' ||
-    key.name === 'up' ||
-    key.name === 'down'
-  ) {
-    draw.board(RL);
+  if (key.name === 'right') {
+    axis.moveRight();
+  } else if (key.name === 'left') {
+    axis.moveLeft();
+  } else if (key.name === 'up') {
+    axis.moveUp();
+  } else if (key.name === 'down') {
+    axis.moveDown();
   }
+
+  draw.board(RL);
 });
 
 draw.frame(RL);

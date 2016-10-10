@@ -2,6 +2,7 @@
 
 const Readline = require('readline');
 
+let axis = require('./axis');
 let config = require('./config');
 let logger = require('./logger');
 
@@ -26,12 +27,15 @@ function frame(RL) {
 function board(RL) {
   muted = false; // stdout enabled
 
-  Readline.cursorTo(RL, 2, 2); // go to second line
+  let x = axis.getX();
+  let y = axis.getY();
+
+  Readline.cursorTo(RL, x, y); // go to second line
 
   // RL.write(`║ ${Date.now()}`); // print timestamp
   RL.write(`#`); // print timestamp
 
-  Readline.cursorTo(RL, 0, config.HEIGHT); // go to last nile
+  Readline.cursorTo(RL, 0, config.HEIGHT); // go to last line
 
   muted = true; // stdout disabled to ignore other input
 }
