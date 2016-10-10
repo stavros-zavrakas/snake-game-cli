@@ -23,7 +23,14 @@ class Snake {
   constructor() {
     this.path = [];
 
-    this.head = new Point(1, 1);
+    this.head = new Point(2, 1);
+
+    this.path.push(new Point(1, 1));
+
+    // @todo: uncomment if you want to have bigger snake
+    // this.path.push(new Point(2, 1));
+    // this.path.push(new Point(3, 1));
+    // this.path.push(new Point(4, 1));
     this.path.push(this.head);
   }
 

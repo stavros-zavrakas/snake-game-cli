@@ -40,20 +40,6 @@ RL.input.on('keypress', (chunk, key) => {
 
   if (availableMoves.indexOf(key.name) > -1) {
     move = key.name;
-
-    // if (move === 'right') {
-    //   snake.moveRight();
-    // } else if (move === 'left') {
-    //   snake.moveLeft();
-    // } else if (move === 'up') {
-    //   snake.moveUp();
-    // } else if (move === 'down') {
-    //   snake.moveDown();
-    // }
-
-    // snake.addToHead(axis.getX(), axis.getY());
-    // draw.board(RL, snake);
-    // snake.removeFromTail();
   }
 });
 
