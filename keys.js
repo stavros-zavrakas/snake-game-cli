@@ -28,22 +28,37 @@ process.stdin.setRawMode(true);
 
 keypress(process.stdin);
 
+let move = 'right';
+let availableMoves = ['right', 'left', 'up', 'down'];
+
 RL.input.on('keypress', (chunk, key) => {
   console.log('keyname', key.name);
 
   RL.clearLine();
 
-  if (key.name === 'right') {
+  if (availableMoves.indexOf(key.name) > -1) {
+    move = key.name;
+  }
+});
+
+let interval = setInterval(function () {
+  console.log('calling');
+  if (move === 'right') {
     axis.moveRight();
-  } else if (key.name === 'left') {
+  } else if (move === 'left') {
     axis.moveLeft();
-  } else if (key.name === 'up') {
+  } else if (move === 'up') {
     axis.moveUp();
-  } else if (key.name === 'down') {
+  } else if (move === 'down') {
     axis.moveDown();
   }
 
   draw.board(RL);
-});
+}, 100);
 
 draw.frame(RL);
+
+process.on('SIGINT', () => {
+  clearInterval(interval);
+  console.log('Received SIGINT.  Press Control-D to exit.');
+});
