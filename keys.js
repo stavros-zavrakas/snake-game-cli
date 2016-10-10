@@ -44,17 +44,7 @@ RL.input.on('keypress', (chunk, key) => {
 });
 
 let interval = setInterval(function () {
-  if (move === 'right') {
-    snake.moveRight();
-  } else if (move === 'left') {
-    snake.moveLeft();
-  } else if (move === 'up') {
-    snake.moveUp();
-  } else if (move === 'down') {
-    snake.moveDown();
-  }
-
-  // snake.addToHead(axis.getX(), axis.getY());
+  snake.move(move);
   draw.board(RL, snake);
   snake.removeFromTail();
 }, 100);

@@ -58,13 +58,27 @@ class Snake {
     return tail;
   }
 
-  // moveUp and moveDown are acting against axis.y
-  moveUp() {
+  move(direction) {
     let head = this.getHeadCoordinates();
 
     let x = head.x;
     let y = head.y;
 
+    if (direction === 'right') {
+      this.moveRight(x, y);
+    } else if (direction === 'left') {
+      this.moveLeft(x, y);
+    } else if (direction === 'up') {
+      this.moveUp(x, y);
+    } else if (direction === 'down') {
+      this.moveDown(x, y);
+    }
+  }
+
+  // @todo: emit an event in case the snake touch the frame
+  
+  // moveUp and moveDown are acting against axis.y
+  moveUp(x, y) {
     y--;
     if (y < 1) {
       y = 1;
@@ -73,12 +87,7 @@ class Snake {
     this.addToHead(x, y);
   }
 
-  moveDown() {
-    let head = this.getHeadCoordinates();
-
-    let x = head.x;
-    let y = head.y;
-
+  moveDown(x, y) {
     y++;
     if (y >= config.HEIGHT - 2) {
       y = config.HEIGHT - 2;
@@ -88,12 +97,7 @@ class Snake {
   }
 
   // moveRight and moveLeft are acting against axis.x
-  moveLeft() {
-    let head = this.getHeadCoordinates();
-
-    let x = head.x;
-    let y = head.y;
-
+  moveLeft(x, y) {
     x--;
     if (x < 1) {
       x = 1;
@@ -102,12 +106,7 @@ class Snake {
     this.addToHead(x, y);
   }
 
-  moveRight() {
-    let head = this.getHeadCoordinates();
-
-    let x = head.x;
-    let y = head.y;
-
+  moveRight(x, y) {
     x++;
     if (x >= config.WIDTH - 2) {
       x = config.WIDTH - 2;
@@ -124,8 +123,6 @@ class Snake {
 
   removeFromTail() {
     this.path.shift();
-
-    // logger.info(this.path);
   }
 }
 
