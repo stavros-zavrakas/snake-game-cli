@@ -2,7 +2,6 @@
 
 const Readline = require('readline');
 
-let axis = require('./axis');
 let config = require('./config');
 let logger = require('./logger');
 
@@ -27,9 +26,6 @@ function frame(RL) {
 function board(RL, snake) {
   muted = false; // stdout enabled
 
-  // let x = axis.getX();
-  // let y = axis.getY();
-
   let tail = snake.getTail();
   let head = snake.getHead();
   logger.info(tail);
@@ -39,8 +35,10 @@ function board(RL, snake) {
   RL.write(`#`);
 
   // Print the new body of the snake
-  Readline.cursorTo(RL, tail.x, tail.y);
-  RL.write(` `);
+  if (tail) {
+    Readline.cursorTo(RL, tail.x, tail.y);
+    RL.write(` `);
+  }
 
   Readline.cursorTo(RL, 0, config.HEIGHT); // go to last line
 

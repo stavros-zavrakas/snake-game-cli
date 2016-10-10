@@ -6,7 +6,6 @@ const Writable = require('stream').Writable;
 const Readline = require('readline');
 
 const Snake = require('./Snake');
-const axis = require('./axis');
 const draw = require('./draw');
 
 let snake = new Snake();
@@ -43,13 +42,13 @@ RL.input.on('keypress', (chunk, key) => {
     move = key.name;
 
     // if (move === 'right') {
-    //   axis.moveRight();
+    //   snake.moveRight();
     // } else if (move === 'left') {
-    //   axis.moveLeft();
+    //   snake.moveLeft();
     // } else if (move === 'up') {
-    //   axis.moveUp();
+    //   snake.moveUp();
     // } else if (move === 'down') {
-    //   axis.moveDown();
+    //   snake.moveDown();
     // }
 
     // snake.addToHead(axis.getX(), axis.getY());
@@ -60,16 +59,16 @@ RL.input.on('keypress', (chunk, key) => {
 
 let interval = setInterval(function () {
   if (move === 'right') {
-    axis.moveRight();
+    snake.moveRight();
   } else if (move === 'left') {
-    axis.moveLeft();
+    snake.moveLeft();
   } else if (move === 'up') {
-    axis.moveUp();
+    snake.moveUp();
   } else if (move === 'down') {
-    axis.moveDown();
+    snake.moveDown();
   }
 
-  snake.addToHead(axis.getX(), axis.getY());
+  // snake.addToHead(axis.getX(), axis.getY());
   draw.board(RL, snake);
   snake.removeFromTail();
 }, 100);
