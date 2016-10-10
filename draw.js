@@ -2,11 +2,8 @@
 
 const Readline = require('readline');
 
+let config = require('./config');
 let logger = require('./logger');
-
-// size of frame
-const MINWIDTH = 120;
-const MINHEIGHT = 40;
 
 let muted;
 
@@ -17,9 +14,9 @@ function frame(RL) {
   Readline.cursorTo(RL, 0, 0);
   Readline.clearScreenDown(RL);
 
-  RL.write(`╔${'═'.repeat( MINWIDTH - 2 )}╗\n`);
-  RL.write(`║${' '.repeat( MINWIDTH - 2 )}║\n`.repeat(MINHEIGHT - 2));
-  RL.write(`╚${'═'.repeat( MINWIDTH - 2 )}╝\n`);
+  RL.write(`╔${'═'.repeat(config.WIDTH - 2 )}╗\n`);
+  RL.write(`║${' '.repeat(config.WIDTH - 2 )}║\n`.repeat(config.HEIGHT - 2));
+  RL.write(`╚${'═'.repeat(config.WIDTH - 2 )}╝\n`);
 
   // board(RL);
   muted = true;
@@ -34,7 +31,7 @@ function board(RL) {
   // RL.write(`║ ${Date.now()}`); // print timestamp
   RL.write(`#`); // print timestamp
 
-  Readline.cursorTo(RL, 0, MINHEIGHT); // go to last nile
+  Readline.cursorTo(RL, 0, config.HEIGHT); // go to last nile
 
   muted = true; // stdout disabled to ignore other input
 }
