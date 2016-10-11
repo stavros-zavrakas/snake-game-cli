@@ -6,10 +6,12 @@ const Writable = require('stream').Writable;
 const Readline = require('readline');
 
 const Snake = require('./Snake');
+const Food = require('./Food');
 const draw = require('./draw');
 const c = require('./constants');
 
 let snake = new Snake(c.DIRECTION_RIGHT);
+let food = new Food();
 
 // custom stdout to suppress output
 const customStdout = new Writable({
@@ -57,4 +59,6 @@ let interval = setInterval(function () {
 }, 500);
 
 draw.grid(RL);
-draw.placeFood(RL);
+
+food.place();
+draw.food(RL, food);
