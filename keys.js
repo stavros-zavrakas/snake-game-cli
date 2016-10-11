@@ -7,8 +7,9 @@ const Readline = require('readline');
 
 const Snake = require('./Snake');
 const draw = require('./draw');
+const c = require('./constants');
 
-let snake = new Snake();
+let snake = new Snake(c.DIRECTION_RIGHT);
 
 // custom stdout to suppress output
 const customStdout = new Writable({
@@ -30,21 +31,17 @@ process.stdin.setRawMode(true);
 
 keypress(process.stdin);
 
-let move = 'right';
-let availableMoves = ['right', 'left', 'up', 'down'];
-
 RL.input.on('keypress', (chunk, key) => {
   console.log('keyname', key.name);
 
   RL.clearLine();
 
-  if (availableMoves.indexOf(key.name) > -1) {
-    move = key.name;
+  if (c.AVAILABLE_DIRECTIONS.indexOf(key.name) > -1) {
+    snake.changeDirection(key.name);
   }
 });
 
 let interval = setInterval(function () {
-  snake.changeDirection(move);
   snake.move();
 
   let hasCrashed = snake.hasCrashed();

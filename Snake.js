@@ -1,5 +1,6 @@
 'use strict';
 
+const c = require('./constants');
 const config = require('./config');
 const logger = require('./logger');
 // let Point = require('./Point');
@@ -20,7 +21,7 @@ class Point {
 }
 
 class Snake {
-  constructor() {
+  constructor(direction) {
     this.path = [];
 
     this.head = new Point(2, 1);
@@ -33,7 +34,7 @@ class Snake {
     // this.path.push(new Point(4, 1));
     this.path.push(this.head);
 
-    this.direction = 'right';
+    this.direction = direction;
     this.crashed = false;
   }
 
