@@ -2,8 +2,10 @@
 
 const Readline = require('readline');
 
-let config = require('./config');
-let logger = require('./logger');
+const Point = require('./Point');
+const libs = require('./libs');
+const config = require('./config');
+const logger = require('./logger');
 
 let mutex;
 
@@ -17,6 +19,21 @@ function grid(RL) {
   RL.write(`╔${'═'.repeat(config.WIDTH - 2 )}╗\n`);
   RL.write(`║${' '.repeat(config.WIDTH - 2 )}║\n`.repeat(config.HEIGHT - 2));
   RL.write(`╚${'═'.repeat(config.WIDTH - 2 )}╝\n`);
+
+  mutex = true;
+}
+
+function food(RL, snake) {
+  let x = libs.getRandomInt(0, config.WIDTH);
+  let y = libs.getRandomInt(0, config.HEIGHT);
+
+  mutex = false;
+
+  Readline.cursorTo(RL, x, y);
+  RL.write(`*`);
+
+  // Move the cursor just after the grid
+  Readline.cursorTo(RL, 0, config.HEIGHT);
 
   mutex = true;
 }
@@ -68,6 +85,7 @@ function writeBuffer(chunk, encoding, callback) {
 
 module.exports = {
   grid: grid,
+  food: food,
   slither: slither,
   message: message,
   writeBuffer: writeBuffer

@@ -1,24 +1,9 @@
 'use strict';
 
+const Point = require('./Point');
 const c = require('./constants');
 const config = require('./config');
 const logger = require('./logger');
-// let Point = require('./Point');
-
-class Point {
-  constructor(x, y) {
-    this.x = x;
-    this.y = y;
-  }
-
-  getX() {
-    return this.x;
-  }
-
-  getY() {
-    return this.y;
-  }
-}
 
 class Snake {
   constructor(direction) {
