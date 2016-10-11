@@ -32,6 +32,8 @@ class Snake {
     // this.path.push(new Point(3, 1));
     // this.path.push(new Point(4, 1));
     this.path.push(this.head);
+
+    this.crashed = false;
   }
 
   getHead() {
@@ -75,13 +77,11 @@ class Snake {
     }
   }
 
-  // @todo: emit an event in case the snake touch the frame
-  
   // moveUp and moveDown are acting against axis.y
   moveUp(x, y) {
     y--;
     if (y < 1) {
-      y = 1;
+      this.crashed = true;
     }
 
     this.addToHead(x, y);
@@ -89,8 +89,8 @@ class Snake {
 
   moveDown(x, y) {
     y++;
-    if (y >= config.HEIGHT - 2) {
-      y = config.HEIGHT - 2;
+    if (y > config.HEIGHT - 2) {
+      this.crashed = true;
     }
 
     this.addToHead(x, y);
@@ -100,7 +100,7 @@ class Snake {
   moveLeft(x, y) {
     x--;
     if (x < 1) {
-      x = 1;
+      this.crashed = true;
     }
 
     this.addToHead(x, y);
@@ -108,11 +108,15 @@ class Snake {
 
   moveRight(x, y) {
     x++;
-    if (x >= config.WIDTH - 2) {
-      x = config.WIDTH - 2;
+    if (x > config.WIDTH - 2) {
+      this.crashed = true;
     }
 
     this.addToHead(x, y);
+  }
+
+  hasCrashed() {
+    return this.crashed;
   }
 
   addToHead(x, y) {

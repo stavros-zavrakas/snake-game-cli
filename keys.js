@@ -45,6 +45,12 @@ RL.input.on('keypress', (chunk, key) => {
 
 let interval = setInterval(function () {
   snake.move(move);
+
+  let hasCrashed = snake.hasCrashed();
+  if (hasCrashed) {
+    clearInterval(interval);
+  }
+
   draw.slither(RL, snake);
   snake.removeFromTail();
 }, 100);
