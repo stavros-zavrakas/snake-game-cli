@@ -28,7 +28,7 @@ class Snake {
 
     this.path.push(new Point(1, 1));
 
-    // @todo: uncomment if you want to have bigger snake
+    // @todo: uncomment if you want to start with a bigger snake
     // this.path.push(new Point(2, 1));
     // this.path.push(new Point(3, 1));
     // this.path.push(new Point(4, 1));
@@ -63,11 +63,11 @@ class Snake {
   }
 
   changeDirection(direction) {
-    let isCurrentUpDown = this.direction === 'up' || this.direction === 'down';
-    let isNextUpDown = direction === 'up' || direction === 'down';
+    let isCurrentUpDown = this.direction === c.DIRECTION_UP || this.direction === c.DIRECTION_DOWN;
+    let isNextUpDown = direction === c.DIRECTION_UP || direction === c.DIRECTION_DOWN;
 
-    let isCurrentLeftRight = this.direction === 'left' || this.direction === 'right';
-    let isNextLeftRight = direction === 'left' || direction === 'right';
+    let isCurrentLeftRight = this.direction === c.DIRECTION_LEFT || this.direction === c.DIRECTION_RIGHT;
+    let isNextLeftRight = direction === c.DIRECTION_LEFT || direction === c.DIRECTION_RIGHT;
 
     if (isCurrentUpDown && isNextUpDown) {
       return;
@@ -84,13 +84,13 @@ class Snake {
     let x = head.x;
     let y = head.y;
 
-    if (this.direction === 'right') {
+    if (this.direction === c.DIRECTION_RIGHT) {
       this.moveRight(x, y);
-    } else if (this.direction === 'left') {
+    } else if (this.direction === c.DIRECTION_LEFT) {
       this.moveLeft(x, y);
-    } else if (this.direction === 'up') {
+    } else if (this.direction === c.DIRECTION_UP) {
       this.moveUp(x, y);
-    } else if (this.direction === 'down') {
+    } else if (this.direction === c.DIRECTION_DOWN) {
       this.moveDown(x, y);
     }
   }
