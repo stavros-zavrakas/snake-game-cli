@@ -54,7 +54,7 @@ let interval = setInterval(function () {
 
   draw.slither(RL, snake);
   snake.removeFromTail();
-}, 100);
+}, 500);
 
 draw.grid(RL);
 draw.placeFood(RL);

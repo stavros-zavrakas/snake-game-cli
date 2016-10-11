@@ -9,14 +9,14 @@ class Snake {
   constructor(direction) {
     this.body = [];
 
-    this.head = new Point(2, 1);
+    this.head = new Point(5, 1);
 
-    this.body.push(new Point(1, 1));
+    this.body.push(new Point(4, 1));
 
     // @todo: uncomment if you want to start with a bigger snake
-    this.body.push(new Point(2, 1));
     this.body.push(new Point(3, 1));
-    this.body.push(new Point(4, 1));
+    this.body.push(new Point(2, 1));
+    this.body.push(new Point(1, 1));
     this.body.push(this.head);
 
     this.direction = direction;
@@ -64,10 +64,10 @@ class Snake {
   }
 
   move() {
-    let head = this.getHeadCoordinates();
+    let headBeforeMove = this.getHeadCoordinates();
 
-    let x = head.x;
-    let y = head.y;
+    let x = headBeforeMove.x;
+    let y = headBeforeMove.y;
 
     if (this.direction === c.DIRECTION_RIGHT) {
       this.moveRight(x, y);
@@ -77,6 +77,35 @@ class Snake {
       this.moveUp(x, y);
     } else if (this.direction === c.DIRECTION_DOWN) {
       this.moveDown(x, y);
+    }
+
+    this.checkBodyConfict();
+  }
+
+  checkBodyConfict() {
+    // Get a copy of the body and remove the last element
+    // that is matching with the head. We do not want to filter
+    // the head against the head.
+    var bodyCopy = this.body.slice();
+    bodyCopy.pop();
+
+    // Get the head after executing the move
+    let head = this.getHeadCoordinates();
+    let x = head.x;
+    let y = head.y;
+
+    // check here if there is a confict with another part of the body
+    let confict = bodyCopy.filter(function (value) {
+      let bodyX = value.getX();
+      let bodyY = value.getY();
+
+      return bodyX === x && bodyY === y;      
+    });
+
+    // If there are elements in the conflict array, then the snake crashed
+    // against the body
+    if (confict.length) {
+      this.crashed = true;
     }
   }
 
