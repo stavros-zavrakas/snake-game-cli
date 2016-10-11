@@ -48,6 +48,15 @@ function slither(RL, snake) {
   mutex = true; // stdout disabled to ignore other input
 }
 
+function message (RL) {
+  mutex = false;
+
+  Readline.cursorTo(RL, 0, config.HEIGHT);
+  RL.write(`Woops! You lost!\r\n`);
+
+  mutex = true;
+}
+
 // Write the stream to the stdout
 function writeBuffer(chunk, encoding, callback) {
   if (!mutex) {
@@ -60,5 +69,6 @@ function writeBuffer(chunk, encoding, callback) {
 module.exports = {
   grid: grid,
   slither: slither,
+  message: message,
   writeBuffer: writeBuffer
 };

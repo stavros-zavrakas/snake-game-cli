@@ -44,11 +44,15 @@ RL.input.on('keypress', (chunk, key) => {
 });
 
 let interval = setInterval(function () {
-  snake.move(move);
+  snake.changeDirection(move);
+  snake.move();
 
   let hasCrashed = snake.hasCrashed();
   if (hasCrashed) {
     clearInterval(interval);
+
+    draw.message(RL);
+    process.exit(0);
   }
 
   draw.slither(RL, snake);

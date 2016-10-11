@@ -33,6 +33,7 @@ class Snake {
     // this.path.push(new Point(4, 1));
     this.path.push(this.head);
 
+    this.direction = 'right';
     this.crashed = false;
   }
 
@@ -60,19 +61,35 @@ class Snake {
     return tail;
   }
 
-  move(direction) {
+  changeDirection(direction) {
+    let isCurrentUpDown = this.direction === 'up' || this.direction === 'down';
+    let isNextUpDown = direction === 'up' || direction === 'down';
+
+    let isCurrentLeftRight = this.direction === 'left' || this.direction === 'right';
+    let isNextLeftRight = direction === 'left' || direction === 'right';
+
+    if (isCurrentUpDown && isNextUpDown) {
+      return;
+    } else if (isCurrentLeftRight && isNextLeftRight) {
+      return;
+    }
+
+    this.direction = direction;
+  }
+
+  move() {
     let head = this.getHeadCoordinates();
 
     let x = head.x;
     let y = head.y;
 
-    if (direction === 'right') {
+    if (this.direction === 'right') {
       this.moveRight(x, y);
-    } else if (direction === 'left') {
+    } else if (this.direction === 'left') {
       this.moveLeft(x, y);
-    } else if (direction === 'up') {
+    } else if (this.direction === 'up') {
       this.moveUp(x, y);
-    } else if (direction === 'down') {
+    } else if (this.direction === 'down') {
       this.moveDown(x, y);
     }
   }
