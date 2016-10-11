@@ -5,11 +5,11 @@ const Readline = require('readline');
 let config = require('./config');
 let logger = require('./logger');
 
-let muted;
+let mutex;
 
-// draw the frame only
+// Draw the frame
 function frame(RL) {
-  muted = false; // stdout enabled
+  mutex = false; // stdout enabled
 
   Readline.cursorTo(RL, 0, 0);
   Readline.clearScreenDown(RL);
@@ -18,36 +18,39 @@ function frame(RL) {
   RL.write(`║${' '.repeat(config.WIDTH - 2 )}║\n`.repeat(config.HEIGHT - 2));
   RL.write(`╚${'═'.repeat(config.WIDTH - 2 )}╝\n`);
 
-  // board(RL);
-  muted = true;
+  mutex = true;
 }
 
-// reset cursor and draw inside of frame
+// Draw the snake move. It is moving the cursor to the
+// head of the snake and prints the # symbol and then if
+// the tail exists, the cursor is moving to the tail
+// coordinates and prints the whitespace symbol
 function board(RL, snake) {
-  muted = false; // stdout enabled
+  mutex = false; // stdout enabled
 
-  let tail = snake.getTail();
   let head = snake.getHead();
+  let tail = snake.getTail();
   logger.info(tail);
 
-  // Print the new body of the snake
+  // Print the new head of the snake
   Readline.cursorTo(RL, head.x, head.y);
   RL.write(`#`);
 
-  // Print the new body of the snake
+  // Remove the tail from the board
   if (tail) {
     Readline.cursorTo(RL, tail.x, tail.y);
     RL.write(` `);
   }
 
-  Readline.cursorTo(RL, 0, config.HEIGHT); // go to last line
+  // Move the cursor just after the frame
+  Readline.cursorTo(RL, 0, config.HEIGHT);
 
-  muted = true; // stdout disabled to ignore other input
+  mutex = true; // stdout disabled to ignore other input
 }
 
+// Write the stream to the stdout
 function writeBuffer(chunk, encoding, callback) {
-
-  if (!muted) {
+  if (!mutex) {
     process.stdout.write(chunk, encoding);
   }
 
