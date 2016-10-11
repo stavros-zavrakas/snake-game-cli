@@ -45,8 +45,8 @@ RL.input.on('keypress', (chunk, key) => {
 
 let interval = setInterval(function () {
   snake.move(move);
-  draw.board(RL, snake);
+  draw.slither(RL, snake);
   snake.removeFromTail();
 }, 100);
 
-draw.frame(RL);
+draw.grid(RL);

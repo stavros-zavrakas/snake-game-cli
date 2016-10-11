@@ -7,8 +7,8 @@ let logger = require('./logger');
 
 let mutex;
 
-// Draw the frame
-function frame(RL) {
+// Draw the grid
+function grid(RL) {
   mutex = false; // stdout enabled
 
   Readline.cursorTo(RL, 0, 0);
@@ -25,7 +25,7 @@ function frame(RL) {
 // head of the snake and prints the # symbol and then if
 // the tail exists, the cursor is moving to the tail
 // coordinates and prints the whitespace symbol
-function board(RL, snake) {
+function slither(RL, snake) {
   mutex = false; // stdout enabled
 
   let head = snake.getHead();
@@ -42,7 +42,7 @@ function board(RL, snake) {
     RL.write(` `);
   }
 
-  // Move the cursor just after the frame
+  // Move the cursor just after the grid
   Readline.cursorTo(RL, 0, config.HEIGHT);
 
   mutex = true; // stdout disabled to ignore other input
@@ -58,7 +58,7 @@ function writeBuffer(chunk, encoding, callback) {
 }
 
 module.exports = {
-  frame: frame,
-  board: board,
+  grid: grid,
+  slither: slither,
   writeBuffer: writeBuffer
 };
