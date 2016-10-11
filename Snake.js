@@ -7,17 +7,17 @@ const logger = require('./logger');
 
 class Snake {
   constructor(direction) {
-    this.path = [];
+    this.body = [];
 
     this.head = new Point(2, 1);
 
-    this.path.push(new Point(1, 1));
+    this.body.push(new Point(1, 1));
 
     // @todo: uncomment if you want to start with a bigger snake
-    // this.path.push(new Point(2, 1));
-    // this.path.push(new Point(3, 1));
-    // this.path.push(new Point(4, 1));
-    this.path.push(this.head);
+    this.body.push(new Point(2, 1));
+    this.body.push(new Point(3, 1));
+    this.body.push(new Point(4, 1));
+    this.body.push(this.head);
 
     this.direction = direction;
     this.crashed = false;
@@ -40,8 +40,8 @@ class Snake {
   getTail() {
     let tail = null;
 
-    if (this.path[0]) {
-      tail = this.path[0];
+    if (this.body[0]) {
+      tail = this.body[0];
     }
 
     return tail;
@@ -125,11 +125,11 @@ class Snake {
   addToHead(x, y) {
     this.head = new Point(x, y);
 
-    this.path.push(this.head);
+    this.body.push(this.head);
   }
 
   removeFromTail() {
-    this.path.shift();
+    this.body.shift();
   }
 }
 

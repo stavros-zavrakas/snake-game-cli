@@ -57,4 +57,4 @@ let interval = setInterval(function () {
 }, 100);
 
 draw.grid(RL);
-draw.food(RL);
+draw.placeFood(RL);

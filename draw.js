@@ -23,7 +23,7 @@ function grid(RL) {
   mutex = true;
 }
 
-function food(RL, snake) {
+function placeFood(RL, snake) {
   let x = libs.getRandomInt(0, config.WIDTH);
   let y = libs.getRandomInt(0, config.HEIGHT);
 
@@ -85,7 +85,7 @@ function writeBuffer(chunk, encoding, callback) {
 
 module.exports = {
   grid: grid,
-  food: food,
+  placeFood: placeFood,
   slither: slither,
   message: message,
   writeBuffer: writeBuffer
