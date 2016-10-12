@@ -5,10 +5,12 @@ const keypress = require('keypress');
 const Writable = require('stream').Writable;
 const Readline = require('readline');
 
+const Game = require('./Game');
 const Snake = require('./Snake');
 const Food = require('./Food');
 const draw = require('./draw');
 const c = require('./constants');
+const logger = require('./logger');
 
 let snake = new Snake(c.DIRECTION_RIGHT);
 let food = new Food();
@@ -33,6 +35,8 @@ process.stdin.setRawMode(true);
 
 keypress(process.stdin);
 
+let game = new Game(100);
+
 RL.input.on('keypress', (chunk, key) => {
   console.log('keyname', key.name);
 
@@ -43,22 +47,7 @@ RL.input.on('keypress', (chunk, key) => {
   }
 });
 
-let interval = setInterval(function () {
-  snake.move();
-
-  let hasCrashed = snake.hasCrashed();
-  if (hasCrashed) {
-    clearInterval(interval);
-
-    draw.message(RL);
-    process.exit(0);
-  }
-
-  draw.slither(RL, snake);
-  snake.removeFromTail();
-}, 500);
-
+game.start(RL, snake, draw);
 draw.grid(RL);
-
 food.place();
 draw.food(RL, food);
