@@ -5,12 +5,12 @@ const keypress = require('keypress');
 const Writable = require('stream').Writable;
 const Readline = require('readline');
 
-const Game = require('./Game');
-const Snake = require('./Snake');
-const Food = require('./Food');
-const draw = require('./draw');
-const c = require('./constants');
-const logger = require('./logger');
+const Game = require('./lib/Game');
+const Snake = require('./lib/Snake');
+const Food = require('./lib/Food');
+const draw = require('./lib/draw');
+const c = require('./lib/constants');
+const logger = require('./lib/logger');
 
 let snake = new Snake(c.DIRECTION_RIGHT);
 let food = new Food();
