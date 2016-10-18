@@ -14,17 +14,22 @@ class Game {
 
   start(RL, snake, food, draw) {
     this.interval = setInterval( () => {
+      // Move the snake (the head of the snake)
       snake.move();
 
+      // Stop the game if the snake crashed against the wall or its body
       let hasCrashed = snake.hasCrashed();
       if (hasCrashed) {
         this.end(RL, draw);
       }
 
+      // Draw the slither on the console
       draw.slither(RL, snake);
 
+      // Check if the snake just ate the food
+      // If just ate place new food and draw it in the grid and don't remove a piece of the tail
+      // If didn't eat remove the last piece of the tail
       let hasEaten = snake.hasEaten(food);
-      logger.info(`hasEaten: ${hasEaten}`);
       if (hasEaten) {
         food.place();
         draw.food(RL, food);
@@ -33,6 +38,7 @@ class Game {
       }
     }, this.timeout);
 
+    // Place the food, draw the grid and the food on the console
     food.place();
     draw.grid(RL);
     draw.food(RL, food);

@@ -102,8 +102,8 @@ class Snake {
       return bodyX === x && bodyY === y;
     });
 
-    // If there are elements in the conflict array, then the snake crashed
-    // against the body
+    // If there are elements in the conflict array, 
+    // then the snake crashed against the body
     if (confict.length) {
       this.crashed = true;
     }
