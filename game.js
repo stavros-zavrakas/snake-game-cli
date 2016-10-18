@@ -10,7 +10,6 @@ const Snake = require('./lib/Snake');
 const Food = require('./lib/Food');
 const draw = require('./lib/draw');
 const c = require('./lib/constants');
-const logger = require('./lib/logger');
 
 let snake = new Snake(c.DIRECTION_RIGHT);
 let food = new Food();
@@ -37,7 +36,7 @@ keypress(process.stdin);
 let game = new Game(100);
 
 RL.input.on('keypress', (chunk, key) => {
-  console.log('keyname', key.name);
+  // console.log('keyname', key.name);
 
   RL.clearLine();
 
