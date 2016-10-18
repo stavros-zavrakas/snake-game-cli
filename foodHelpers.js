@@ -12,6 +12,9 @@ function findFreeSpaceForFood (snakeBody) {
   let x = libs.getRandomInt(1, config.WIDTH - 2);
   let y = libs.getRandomInt(1, config.HEIGHT - 2);
 
+  // @todo: we should not have infinite loop here
+  // We need to try few times and if this approach fail
+  // we have to pick the first free element of the grid
   while (1) {
     // iterate over the snakeBody and check if 
     // there is conflict with the random point
