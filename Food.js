@@ -23,12 +23,14 @@ class Food {
       for (i = 0; i < snakeBody.length; i++) {
         bodyPiece = snakeBody[i];
         conflict = (x === bodyPiece.getX() && y === bodyPiece.getY());
+        // If we find a conflict with a part of the body, there is no
+        // reason to continue the iteration
         if (conflict) {
           break;
         }
       }
 
-      // If there is conflict, pick random point again otherwise break
+      // If there is conflict, pick random point again, otherwise break
       if (conflict) {
         x = libs.getRandomInt(1, config.WIDTH - 2);
         y = libs.getRandomInt(1, config.HEIGHT - 2);
