@@ -31,7 +31,7 @@ class Game {
       // If didn't eat remove the last piece of the tail
       let hasEaten = snake.hasEaten(food);
       if (hasEaten) {
-        food.place();
+        food.place(snake.getBody());
         draw.food(RL, food);
       } else {
         snake.removeFromTail();
@@ -39,7 +39,7 @@ class Game {
     }, this.timeout);
 
     // Place the food, draw the grid and the food on the console
-    food.place();
+    food.place(snake.getBody());
     draw.grid(RL);
     draw.food(RL, food);
   }

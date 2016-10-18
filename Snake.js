@@ -27,6 +27,10 @@ class Snake {
     return this.head;
   }
 
+  getBody() {
+    return this.body.slice();
+  }
+
   getHeadCoordinates() {
     let x = this.head.getX();
     let y = this.head.getY();
