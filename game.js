@@ -47,5 +47,3 @@ RL.input.on('keypress', (chunk, key) => {
 });
 
 game.start(RL, snake, food, draw);
-draw.grid(RL);
-draw.food(RL, food);

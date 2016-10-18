@@ -13,7 +13,7 @@ class Game {
   }
 
   start(RL, snake, food, draw) {
-    this.interval = setInterval(function () {
+    this.interval = setInterval( () => {
       snake.move();
 
       let hasCrashed = snake.hasCrashed();
@@ -34,6 +34,8 @@ class Game {
     }, this.timeout);
 
     food.place();
+    draw.grid(RL);
+    draw.food(RL, food);
   }
 
   end(RL, draw) {
