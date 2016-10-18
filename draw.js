@@ -45,7 +45,6 @@ function slither(RL, snake) {
 
   let head = snake.getHead();
   let tail = snake.getTail();
-  logger.info(tail);
 
   // Print the new head of the snake
   Readline.cursorTo(RL, head.x, head.y);

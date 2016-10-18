@@ -4,7 +4,7 @@
 // const libs = require('./libs');
 // const c = require('./constants');
 // const config = require('./config');
-// const logger = require('./logger');
+const logger = require('./logger');
 
 class Game {
   constructor(timeout) {
@@ -12,7 +12,7 @@ class Game {
     this.interval = null;
   }
 
-  start(RL, snake, draw) {
+  start(RL, snake, food, draw) {
     this.interval = setInterval(function () {
       snake.move();
 
@@ -22,9 +22,18 @@ class Game {
       }
 
       draw.slither(RL, snake);
-      snake.removeFromTail();
+
+      let hasEaten = snake.hasEaten(food);
+      logger.info(`hasEaten: ${hasEaten}`);
+      if (hasEaten) {
+        food.place();
+        draw.food(RL, food);
+      } else {
+        snake.removeFromTail();
+      }
     }, this.timeout);
 
+    food.place();
   }
 
   end(RL, draw) {

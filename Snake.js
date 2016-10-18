@@ -99,7 +99,7 @@ class Snake {
       let bodyX = value.getX();
       let bodyY = value.getY();
 
-      return bodyX === x && bodyY === y;      
+      return bodyX === x && bodyY === y;
     });
 
     // If there are elements in the conflict array, then the snake crashed
@@ -149,6 +149,21 @@ class Snake {
 
   hasCrashed() {
     return this.crashed;
+  }
+
+  hasEaten(food) {
+    let place = food.getCurrent();
+
+    let x = place.getX();
+    let y = place.getY();
+
+    let head = this.getHeadCoordinates();
+
+    if (x === head.x && y === head.y) {
+      return true;
+    }
+
+    return false;
   }
 
   addToHead(x, y) {

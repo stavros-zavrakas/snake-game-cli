@@ -28,7 +28,6 @@ const RL = Readline.createInterface({
   historySize: 0,
 });
 
-// some options I've been playing with
 Readline.emitKeypressEvents(process.stdin);
 process.stdin.setEncoding('utf8');
 process.stdin.setRawMode(true);
@@ -47,7 +46,6 @@ RL.input.on('keypress', (chunk, key) => {
   }
 });
 
-game.start(RL, snake, draw);
+game.start(RL, snake, food, draw);
 draw.grid(RL);
-food.place();
 draw.food(RL, food);
