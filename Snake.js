@@ -68,6 +68,7 @@ class Snake {
   }
 
   move() {
+    // Use this to get a copy of the head coordinates
     let headBeforeMove = this.getHeadCoordinates();
 
     let x = headBeforeMove.x;
