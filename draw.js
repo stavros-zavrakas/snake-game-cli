@@ -2,9 +2,7 @@
 
 const Readline = require('readline');
 
-const Point = require('./Point');
 const config = require('./config');
-const logger = require('./logger');
 
 let mutex;
 
